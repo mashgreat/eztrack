@@ -53,9 +53,6 @@
                     <li>
                         <a href="facts.html">Facts</a>
                     </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -82,78 +79,11 @@
         <!-- Image Header -->
         <div class="row">
             <div class="col-lg-12">
-                <img class="img-responsive" src="http://placehold.it/1200x300" alt="">
+                <p style="font-size: 22px;">EZtrack is a device that automatically keeps track of your blood sugar and sends the results to your phone. It gives suggestions on how you should deal with your sugar level. It will remind you throughout the day on when you should check your sugar level or estimate where it should be. Below is a demo of the app where you plug in your sugar level and the app tells you how to approach it.</p>
+                <img class="img-responsive" src="http://siliconangle.com/files/2015/12/Googles_wearable_needle-free_blood_draw.png" alt="">
             </div>
         </div>
         <!-- /.row -->
-
-        <!-- Service Panels -->
-        <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h2 class="page-header">Services Panels</h2>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </div>
-                    <div class="panel-body">
-                        <h4>Service One</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-car fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </div>
-                    <div class="panel-body">
-                        <h4>Service Two</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-support fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </div>
-                    <div class="panel-body">
-                        <h4>Service Three</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="panel panel-default text-center">
-                    <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </div>
-                    <div class="panel-body">
-                        <h4>Service Four</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <!-- Service Tabs -->
         <div class="row">
@@ -179,7 +109,10 @@
               <button type="submit" class="btn btn-default">Check Level</button>
             </form>
             <div class="col-lg-12 hide" id="glucose_results">
-                <h2 style="font-size: 1.25em">Your blood sugar level is normal</h2>
+                <h2 style="font-size: 1.25em;font-weight:bold;" id="glucose_result_text"></h2>
+                <br />
+                <img src="http://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/articles/health_and_medical_reference/diabetes/normal-blood-sugar-levels-chart-adults.jpg" alt="Glucose Levels" />
+                
             </div>
         </div>
 
@@ -190,7 +123,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; EZtrack 2016</p>
                 </div>
             </div>
         </footer>
@@ -218,10 +151,44 @@
           console.log(glucose_level);
           console.log(setting);
           
-          if (glucose_level <= 100) && ( {
+
+
+          if (glucose_level <= 100 && setting == 'Fasting') {
               $('#glucose_results').attr('class', 'col-lg-12');
-              console.log('in');
-              
+              $('#glucose_result_text').html('Your blood sugar level is normal.');
+          } else if (glucose_level > 100 && setting == 'Fasting') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is abnormal.');
+          } else if (glucose_level < 70 && setting == 'Before Meal') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is low.');
+          } else if (glucose_level >= 70 && glucose_level <= 130 && setting == 'Before Meal') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is normal.');
+          } else if (glucose_level > 130 && setting == 'Before Meal') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is high.');
+          } else if (glucose_level <= 180 && setting == 'After Meal') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is normal.');
+          } else if (glucose_level > 180 && setting == 'After Meal') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is abnormal.');
+          } else if (glucose_level <= 100 && setting == 'Before Exercise') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is normal.');
+          } else if (glucose_level > 100 && setting == 'Before Exercise') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is abnormal.');
+          } else if (glucose_level < 100 && setting == 'Bedtime') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is low.');
+          } else if (glucose_level >= 100 && glucose_level <= 140 && setting == 'Bedtime') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is normal.');
+          } else if (glucose_level > 140 && setting == 'Bedtime') {
+              $('#glucose_results').attr('class', 'col-lg-12');
+              $('#glucose_result_text').html('Your blood sugar level is high.');
           }
           
           event.preventDefault();
